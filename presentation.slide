@@ -1,0 +1,39 @@
+Generics en Go
+23 de Septiembre 2023
+
+Agustin Luques
+HomeVision
+luquesagustin@gmail.com
+
+Nicolás del Piano
+HomeVision
+ndel314@gmail.com
+
+* Us
+
+- Software Engineers
+
+.image assets/hv-logo.png 150 _
+.caption [[https://homevision.co][HomeVision]]
+
+- Experiencia en Nerdearla
+
+.image assets/nerdearla-logo.svg _ 800
+.caption [[https://nerdear.la][Nerdearla]]
+
+
+* Basic
+
+* Type Parameters
+
+* Constraints
+
+* Tilde
+
+* Constraints Literals
+
+    type any = interface{}
+
+* Generics in Types
+
+* Type Inference
