@@ -42,7 +42,7 @@ func main() {
 		{"How to be a ninja in Rust", "Juan"},
 	}
 
-	track := NewTrack("Dev", talks)
+	track := NewTrack[Talk]("Dev", talks)
 
 	for {
 		event, ok := track.NextEvent()
@@ -58,7 +58,7 @@ func main() {
 		{"Working with Kubernetes", []string{"Ari", "Rafa"}},
 	}
 
-	track2 := NewTrack("Wokshops", workshops)
+	track2 := NewTrack[Workshop]("Wokshops", workshops)
 
 	for {
 		event, ok := track2.NextEvent()

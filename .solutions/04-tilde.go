@@ -1,11 +1,7 @@
-package results
+package main
 
 import "fmt"
 
-type Float interface {
-	~float32 | ~float64
-}
-
-func GetFloatsIn2Decimals[F Float](f F) string {
+func GetFloatsIn2Decimals[F ~float32 | ~float64](f F) string {
 	return fmt.Sprintf("%.2f", f)
 }
