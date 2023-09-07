@@ -1,0 +1,1 @@
+https://github.com/golang/go/issues/48522
