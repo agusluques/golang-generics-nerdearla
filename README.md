@@ -1,19 +1,5 @@
 # golang-generics-nerdearla
 
-## slides
-
-[Presentation link](https://go-talks.appspot.com/github.com/agusluques/golang-generics-nerdearla/presentation.slide?ref=main)
-
-Run locally:
-
-```bash
-$ go install golang.org/x/tools/cmd/present@latest
-$ present
-```
-
-Open [http://127.0.0.1:3999](http://127.0.0.1:3999)
-
-=======
 Este repositorio contiene el código que vamos a usar en el workshop de [Golang Generics de Nerdearla 2023](), dictado por Agustín Luques y Nicolás Del Piano.
 
 ## Introducción
