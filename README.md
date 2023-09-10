@@ -1,7 +1,7 @@
 # golang-generics-nerdearla
 
-<<<<<<< Updated upstream
 ## slides
+
 [Presentation link](https://go-talks.appspot.com/github.com/agusluques/golang-generics-nerdearla/presentation.slide?ref=main)
 
 Run locally:
@@ -10,6 +10,7 @@ Run locally:
 $ go install golang.org/x/tools/cmd/present@latest
 $ present
 ```
+
 Open [http://127.0.0.1:3999](http://127.0.0.1:3999)
 
 =======
@@ -56,4 +57,3 @@ Cada tipo tiene un "valor cero" (_zero value_), el cual puede ser pensado como e
 - El valor cero de un tipo string es `""`
 
 ### Tipos Compuestos
->>>>>>> Stashed changes
