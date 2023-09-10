@@ -44,9 +44,9 @@ Cada tipo tiene un "valor cero" (_zero value_), el cual puede ser pensado como e
 
 ### Tipos Compuestos
 
-##
+## Generics
 
-Go es un lenguaje de tipado estático, lo que significa que significa que el chequeo de tipos de las variables y parámetros se da en tiempo de compilación. Los tipos básicos junto con sus construcciones en `maps`, `slices` y `channels`, y las funciones asociadas como `len`, `cap`, o `make`, aceptan y retornan valores de diferentes tipos:
+Go es un lenguaje de tipado estático, lo que significa que significa que el chequeo de tipos de las variables, funciones y parámetros se da en tiempo de compilación. Los tipos básicos junto con sus construcciones con `maps`, `slices` y `channels`, y las funciones asociadas como `len`, `cap`, o `make`, aceptan y retornan valores de diferentes tipos:
 
 ```go
 arrayOfInts := []int{1,2,3}
@@ -59,10 +59,14 @@ fmt.Println("El tamaño del arreglo de strings es: " + len(arrayOfStrings))
 // Imprime: "El tamaño del arreglo de strings es: 3"
 ```
 
-Lo cual nos dice que tenemos soporte de genéricos para estos tipos built-in y las funciones ya definidas en el lenguaje.
+Lo cual nos dice que tenemos soporte de genéricos para tipos built-in con las funciones ya definidas en el lenguaje.
 
-¿Pero qué pasa con las funciones y tipos que definimos nosotros?
+¿Pero qué pasa con los tipos y funciones que definimos nosotros como programadores?
 
 ```go
 
 ```
+
+## Interfaces
+
+## Inferencia de Tipos
