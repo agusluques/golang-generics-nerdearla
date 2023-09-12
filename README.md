@@ -133,9 +133,15 @@ Las constantes que usemos dentro de funciones o métodos tienen que satisfacer a
 func SumarMil[T Integer](v T) T {
   return v + 1_000
 }
+
+fmt.Println(SumarMil(100))
 ```
 
-Ya que el tipo `int8` no puede representar ese valor.
+Retorna:
+
+    ./prog.go:47:13: cannot convert 1_000 (untyped int constant 1000) to type T
+
+ya que el tipo `int8` no puede representar ese valor.
 
 Pero:
 
@@ -144,4 +150,8 @@ Pero:
 func SumarCien[T Integer](v T) T {
   return v + 100
 }
+
+fmt.Println(SumarCien(100))
 ```
+
+Retorna "200" como se esperaría.
