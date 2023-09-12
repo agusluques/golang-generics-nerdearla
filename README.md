@@ -63,10 +63,85 @@ Lo cual nos dice que tenemos soporte de genéricos para tipos built-in con las f
 
 ¿Pero qué pasa con los tipos y funciones que definimos nosotros como programadores?
 
+Consideremos un caso de uso bastante simple. Tenemos una lista de productos y queremos conocer la suma del valor total:
+
+```go
+type Producto struct {
+  Nombre string
+  Precio int
+}
+
+productos := []Producto{
+  {Nombre: "Producto A", Precio: 1000},
+  {Nombre: "Producto B", Precio: 1500},
+  {Nombre: "Producto C", Precio: 2500},
+}
+```
+
+Una solución probable es:
+
+```go
+total := 0
+
+for _, producto := range productos {
+  total += producto.Precio
+}
+```
+
+Ahora bien, supongamos que queremos obtener el producto más caro:
+
+```go
+productoMasCaro := Producto{Precio: 0}
+
+for _, producto := range productos {
+  if productoMasCaro.Precio < producto.Precio {
+    productoMasCaro = producto
+  }
+}
+```
+
+Algo muy similar para obtener el producto mas barato:
+
+```go
+productoMasBarato := Producto{Precio: math.MaxInt}
+
+for _, producto := range productos {
+  if productoMasBarato.Precio > producto.Precio {
+    productoMasBarato = producto
+  }
+}
+```
+
+Notamos un patrón que se repite...
+
 ```go
 
 ```
 
+## Generics en Go
+
 ## Interfaces
 
 ## Inferencia de Tipos
+
+## Uso de Constantes
+
+Las constantes que usemos dentro de funciones o métodos tienen que satisfacer al valor más general posible de todos los tipos que abarcan el tipo genérico. Veamos un ejemplo:
+
+```go
+// No es válido!
+func SumarMil[T Integer](v T) T {
+  return v + 1_000
+}
+```
+
+Ya que el tipo `int8` no puede representar ese valor.
+
+Pero:
+
+```go
+// Válido!
+func SumarCien[T Integer](v T) T {
+  return v + 100
+}
+```
