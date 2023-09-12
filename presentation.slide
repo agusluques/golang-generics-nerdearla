@@ -81,6 +81,16 @@ Go puede inferir el tipo sin tener que especificarlo
 
 .code 09-common-struct-fields/common_fields.go 
 
+
+## Known Issues
+
+.image assets/github-issue-1.png _ 1000
+.image assets/github-issue-2.png _ 1000
 .caption [[https://github.com/golang/go/issues/48522][Github Issue]]
+
+## Known Issues
+
+.image assets/go-1.18-doc.png _ 1000
+.caption [[https://go.dev/doc/go1.18][Go v1.18]]
 
 ## When to use Generics
