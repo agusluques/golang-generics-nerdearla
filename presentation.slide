@@ -1,5 +1,5 @@
-Generics en Go
-23 de Septiembre 2023
+# Generics en Go
+27 de Septiembre 2023
 
 Agustin Luques
 HomeVision
@@ -9,7 +9,7 @@ Nicolás del Piano
 HomeVision
 ndel314@gmail.com
 
-* Us
+## Nosotros
 
 - Software Engineers
 
@@ -20,18 +20,66 @@ ndel314@gmail.com
 
 .image assets/golang-logo.png 
 
-* Basic
+## Historia
 
-* Type Parameters
+Los _Generics_ fueron introducidos en Go `v1.18`
 
-* Constraints
+**Antes de Go**
 
-* Tilde
+Se podia utilizar `interface{}` or `any`
 
-* Constraints Literals
+.code presentation.go /^func PrintValue/,/^}/
 
-    type any = interface{}
+## Agenda
 
-* Generics in Types
+1. Sintaxis
+2. Type Parameters in **Functions**
+3. Constraints Package
+4. Constraints Literals
+5. Tilde (`~`)
+6. Type Parameters in **Types**
+7. Type Inference
 
-* Type Inference
+## Sintaxis
+
+## Type Parameters in Functions
+
+## Constraints Package
+
+## Constraints Literals
+
+.code 04-contraints-literals/literals.go /START1 OMIT/,/END1 OMIT/
+
+## Constraints Literals
+
+.code 04-contraints-literals/literals.go /START2 OMIT/,/END2 OMIT/
+
+## Constraints Literals
+
+.code 04-contraints-literals/literals.go /START3 OMIT/,/END3 OMIT/
+
+## Constraints Literals
+
+.code 04-contraints-literals/literals.go /START4 OMIT/,/END4 OMIT/
+
+## Tilde (~)
+
+## Type Parameters in Types
+
+## Type Inference
+
+Go puede inferir el tipo sin tener que especificarlo
+
+**Partial inference**
+
+.code 07-type-inference/inference.go
+
+## Type Inference Advanced
+
+## Known Issues
+
+.code 09-common-struct-fields/common_fields.go 
+
+.caption [[https://github.com/golang/go/issues/48522][Github Issue]]
+
+## When to use Generics

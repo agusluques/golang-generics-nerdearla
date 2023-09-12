@@ -11,7 +11,7 @@ type Point struct {
 }
 
 func GetX[P interface{ Rect | Point }](p P) int {
-	return p.X
+	return p.X // HL
 }
 
 func main() {
