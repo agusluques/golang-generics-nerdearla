@@ -20,25 +20,26 @@ ndel314@gmail.com
 
 .image assets/golang-logo.png 
 
-## Historia
+## Agenda
+
+1. Introducción
+2. Sintaxis
+3. Type Parameters in **Functions**
+4. Constraints Package
+5. Constraints Literals
+6. Tilde (`~`)
+7. Type Parameters in **Types**
+8. Type Inference
+
+## Introducción
 
 Los _Generics_ fueron introducidos en Go `v1.18`
 
-**Antes de Go**
+**Antes de Generics**
 
 Se podia utilizar `interface{}` or `any`
 
 .code presentation.go /^func PrintValue/,/^}/
-
-## Agenda
-
-1. Sintaxis
-2. Type Parameters in **Functions**
-3. Constraints Package
-4. Constraints Literals
-5. Tilde (`~`)
-6. Type Parameters in **Types**
-7. Type Inference
 
 ## Sintaxis
 
