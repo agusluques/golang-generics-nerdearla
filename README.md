@@ -120,11 +120,11 @@ Notamos un patrón que se repite...
 
 ## Generics en Go
 
-## Interfaces
+## Constraints
 
-## Inferencia de Tipos
+### Nuestras propias constraints
 
-## Uso de Constantes
+### Uso de constantes
 
 Las constantes que usemos dentro de funciones o métodos tienen que satisfacer al valor más general posible de todos los tipos que abarcan el tipo genérico. Veamos un ejemplo:
 
@@ -155,3 +155,11 @@ fmt.Println(SumarCien(100))
 ```
 
 Retorna "200" como se esperaría.
+
+## Interfaces versus Generics
+
+## Reflection versus Generics
+
+## Inferencia de Tipos
+
+## Definiendo nuevos tipos de datos con Generics
