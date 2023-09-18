@@ -23,13 +23,13 @@ ndel314@gmail.com
 ## Agenda
 
 1. Introducción
-2. Sintaxis
-3. Type Parameters in **Functions**
-4. Constraints Package
-5. Constraints Literals
-6. Tilde (`~`)
-7. Type Parameters in **Types**
-8. Type Inference
+1. Sintaxis
+1. Type Parameters in **Functions**
+1. Constraints Literals
+1. Constraints Package
+1. Tilde (`~`)
+1. Type Parameters in **Types**
+1. Type Inference
 
 ## Introducción
 
@@ -43,9 +43,17 @@ Se podia utilizar `interface{}` or `any`
 
 ## Sintaxis
 
-## Type Parameters in Functions
+## Sintaxis
 
-## Constraints Package
+Seccion de sintaxis
+
+.code 01-basic/basic.go /^func GetStringFromInt\(a int\) string {$/,/^}/
+
+## Sintaxis
+
+Seccion de sintaxis
+
+## Type Parameters in Functions
 
 ## Constraints Literals
 
@@ -62,6 +70,8 @@ Se podia utilizar `interface{}` or `any`
 ## Constraints Literals
 
 .code 04-contraints-literals/literals.go /START4 OMIT/,/END4 OMIT/
+
+## Constraints Package
 
 ## Tilde (~)
 
@@ -80,7 +90,6 @@ Go puede inferir el tipo sin tener que especificarlo
 ## Known Issues
 
 .code 09-common-struct-fields/common_fields.go 
-
 
 ## Known Issues
 

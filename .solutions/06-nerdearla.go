@@ -5,6 +5,7 @@ import "fmt"
 type Workshop struct {
 	title    string
 	speakers []string
+	repoURL  string
 }
 
 type Talk struct {
@@ -18,11 +19,11 @@ type event interface {
 
 type Track[T event] struct {
 	title  string
-	events []*T
+	events []T
 }
 
-func NewTrack[T event](title string, events []*T) *Track[T] {
-	return &Track[T]{title, events}
+func NewTrack[T event](title string, events []T) Track[T] {
+	return Track[T]{title, events}
 }
 
 // Gets first event and removes it from the list
@@ -32,11 +33,11 @@ func (t *Track[T]) NextEvent() (*T, bool) {
 	}
 	next := t.events[0]
 	t.events = t.events[1:]
-	return next, true
+	return &next, true
 }
 
 func main() {
-	talks := []*Talk{
+	talks := []Talk{
 		{"Go for beginners", "Nahuel"},
 		{"Javascript is awesome", "Sebas"},
 		{"How to be a ninja in Rust", "Juan"},
@@ -52,13 +53,13 @@ func main() {
 		fmt.Printf("%+v\n", event)
 	}
 
-	workshops := []*Workshop{
-		{"Generics in Go", []string{"Agus", "Nico"}},
-		{"Building a CI/CD pipeline", []string{"Matias", "Jorge"}},
-		{"Working with Kubernetes", []string{"Ari", "Rafa"}},
+	workshops := []Workshop{
+		{"Generics in Go", []string{"Agus", "Nico"}, ""},
+		{"Building a CI/CD pipeline", []string{"Matias", "Jorge"}, ""},
+		{"Working with Kubernetes", []string{"Ari", "Rafa"}, ""},
 	}
 
-	track2 := NewTrack[Workshop]("Wokshops", workshops)
+	track2 := NewTrack[Workshop]("Workshops", workshops)
 
 	for {
 		event, ok := track2.NextEvent()
@@ -67,5 +68,4 @@ func main() {
 		}
 		fmt.Printf("%+v\n", event)
 	}
-
 }

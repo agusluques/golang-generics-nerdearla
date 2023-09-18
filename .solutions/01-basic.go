@@ -2,6 +2,6 @@ package main
 
 import "fmt"
 
-func GetString[T any](a T) string {
+func GetStringFrom[T any](a T) string {
 	return fmt.Sprintf("%v", a)
 }

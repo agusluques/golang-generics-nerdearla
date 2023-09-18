@@ -13,3 +13,8 @@ func GetStringFromBoolean(a bool) string {
 func GetStringFromString(a string) string {
 	return a
 }
+
+// Rewrite this function using generics
+func GetStringFrom(a any) string {
+	return fmt.Sprintf("%v", a)
+}
