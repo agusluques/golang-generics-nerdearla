@@ -251,9 +251,17 @@ type Ordered interface {
 
 The definition of the above Ordered constraint makes sense it would allow the use of the <, <=, >, and >= operators since these types are normally comparable outside of a generic scope.
 
+#### Underlying Types
+
+#### Unions
+
+#### Combinaciones
+
 ### Uso de constantes
 
-Las constantes que usemos dentro de funciones o métodos tienen que satisfacer al valor más general posible de todos los tipos que abarcan el tipo genérico. Veamos un ejemplo:
+Las constantes que usemos dentro de funciones o métodos tienen que satisfacer al valor más general posible de todos los tipos que abarcan el tipo genérico.
+
+Veamos un ejemplo:
 
 ```go
 // No es válido!
