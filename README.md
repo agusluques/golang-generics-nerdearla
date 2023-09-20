@@ -253,9 +253,52 @@ The definition of the above Ordered constraint makes sense it would allow the us
 
 #### Underlying Types
 
+Habrás notado la notación `~T` en los ejemplos anteriores.
+
+La tilde `~` significa que el tipo `T` es de tipo `T`, o es equivalente a `T`.
+
+Por ejemplo, si definimos:
+
+```go
+type Precio int
+```
+
+Sabemos que "por debajo" `Precio` es lo mismo que un `int`: debería poder hacer las mismas cosas.
+
+Entonces:
+
+```go
+func SumarMil[T ~int](v T) T {
+  return v + 1_000
+}
+
+var p Precio = 100
+
+fmt.Println(SumarMil(p)) // Imprime 1100
+```
+
+¿Qué pasaría si no usaramos la tilde?
+
+```go
+func SumarMil[T int](v T) T {
+  return v + 1_000
+}
+
+var p Precio = 100
+
+fmt.Println(SumarMil(p))
+// Precio does not satisfy int (possibly missing ~ for int in int)
+```
+
 #### Unions
 
 #### Combinaciones
+
+```go
+type Integer interface {
+
+}
+```
 
 ### Uso de constantes
 
