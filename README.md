@@ -89,7 +89,7 @@ func calcularTotalPrecios(precios []Precio) Precio {
 }
 ```
 
-Ahora bien, supongamos que queremos obtener la distancia total:
+Ahora bien, supongamos que tenemos otro tipo `Distancia` y queremos obtener la distancia total en un slice:
 
 ```go
 type Distancia int // Distancia en metros
@@ -111,10 +111,10 @@ func calcularTotalDistancias(distancias []Distancia) Distancia {
 }
 ```
 
-Notamos un patrón que se repite:
+Notamos un patrón que se repite, dado un `T` con ciertas propiedades:
 
 ```go
-func calcularTotal[T Sumable](t []T) T {
+func calcularTotal[T ???](t []T) T {
   var total T = 0
 
   for _, element := range t {
@@ -125,7 +125,7 @@ func calcularTotal[T Sumable](t []T) T {
 }
 ```
 
-Donde sumable esta definido por la siguiente interfaz:
+Si reemplazamos `???` por la interfaz `Sumable` definida como:
 
 ```go
 type Sumable interface {
@@ -133,16 +133,16 @@ type Sumable interface {
 }
 ```
 
-Y ahora, podemos directamente usar la función genérica `calcularTotal` gratis:
+Podemos directamente usar la función genérica `calcularTotal` gratis en los slices de ambos tipos `Precio` y `Distancia`:
 
 ```go
 calcularTotal(precios)
 calcularTotal(distancias)
 ```
 
-Utilizando el mismo nombre para ambos slices de diferentes tipos, reduciendo así el código repetitivo.
+💥 reduciendo así la repetición de código.
 
-Otra ventaja es que los tests de `calcularTotal` van a cubrir ambos tipos.
+### Notación
 
 ## Constraints
 
@@ -334,11 +334,60 @@ fmt.Println(SumarCien(100))
 
 Retorna "200" como se esperaría.
 
+## Inferencia de Tipos
+
+Go ofrece inferencia de tipos cuando usamos el operador `:=`:
+
+```go
+x := 1
+fmt.Println(reflect.TypeOf(x)) // int
+```
+
+Y también lo soporta en Generics para simplificar las llamadas a funciones:
+
+```go
+func Contiene[T comparable](t []T, v T) bool {
+  for _, x := range t {
+    if x == v {
+      return true
+    }
+  }
+
+  return false
+}
+
+listaStrings := []string{"1", "2"}
+Contiene(listaStrings, "1") // true
+
+listaInts := []int{1, 2}
+Contiene(listaInts, 100) // false
+```
+
+Vemos que podemos omitir los argumentos de tipo para `Contiene`: Go lo hace por nosotros.
+
+En algunas situaciones sí hay que especificarlo, como por ejemplo, si el tipo genérico se usa en el valor de retorno:
+
+```go
+type Integer interface {
+    int | int8 | int16 | int32 | int64 | uint | uint8 | uint16 | uint32 | uint64
+}
+
+func Convert[T1, T2 Integer](in T1) T2 {
+    return T2(in)
+}
+
+func main() {
+    var a int = 10
+    b := Convert[int](a) // error: can't infer the return type
+    fmt.Println(b)
+}
+```
+
+## Generics Múltiples
+
 ## Interfaces versus Generics
 
 ## Reflection versus Generics
-
-## Inferencia de Tipos
 
 ## Definiendo nuevos tipos de datos con Generics
 
