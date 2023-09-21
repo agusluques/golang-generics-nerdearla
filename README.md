@@ -65,7 +65,7 @@ Lo cual nos dice que tenemos soporte de genéricos para tipos built-in con las f
 
 ### Generics en Go
 
-Los genéricos (o parámetros de tipo) en Go son una herramienta que nos da el lenguaje para poder especificar libremente el tipo de datos de los parámetros de una función o método, básicamente porque queremos mantenerlas lo más genéricas que se puedan.
+Los tipos genéricos (o también llamados _parámetros de tipo_) en Go nos permiten parametrizar el tipo de datos de los argumentos de una función para mantenerlos lo más abstractos que se puedan y poder definir funciones más genéricas, evitando la repetición de código.
 
 Consideremos un caso de uso bastante simple. Tenemos una lista de precios y queremos conocer la suma total:
 
