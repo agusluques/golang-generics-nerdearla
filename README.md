@@ -341,3 +341,46 @@ Retorna "200" como se esperaría.
 ## Inferencia de Tipos
 
 ## Definiendo nuevos tipos de datos con Generics
+
+## Estado del Arte
+
+En esta sección veremos qué limitaciones tenemos con los Generics en la versión actual de Go `1.21`.
+
+### ❌ Tipos genéricos en alias
+
+Una declaración de alias de tipo no puede tener un parámetro de tipo:
+
+```go
+type T[X, Y any] func(X) Y
+
+type A = T[int, string] // ok
+
+type B[X any] = T[X, X] // error: generic type cannot be alias
+```
+
+### ❌ Métodos Genéricos
+
+Actualmente los [métodos no soportan parámetros de tipos](https://go.googlesource.com/proposal/+/refs/heads/master/design/43651-type-parameters.md#methods-may-not-take-additional-type-arguments).
+
+Es decir, el siguiente código no compila:
+
+```go
+type Moneda struct {
+  valor int
+}
+
+func (m *Moneda) Valor[T ~int]() T {
+  return m.valor // syntax error: method must have no type parameters
+}
+```
+
+Existe una [issue en GitHub](https://github.com/golang/go/issues/49085) sobre esto.
+
+### ❌ Embeber Genéricos
+
+```go
+type Derived[Base any] struct {
+	Base // error: embedded field type cannot be a (pointer to a) type parameter
+	x bool
+}
+```
