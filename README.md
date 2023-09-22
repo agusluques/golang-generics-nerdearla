@@ -194,18 +194,70 @@ type i[T any] interface {
 
 ### Funciones Genéricas
 
-// TODO
+Uno de los grandes problemas que teníamos en Go era la definición de funciones que hacian escencialmente lo mismo para distintos tipos, pero por una limitación del lenguaje, no podíamos generalizarla y terminábamos copiando y pegando la definición de `Map` en todos los lugares que necesitábamos.
+
+Con generics, definir funciones generales se facilita bastante:
+
+```go
+// Map convierte []T1 a []T2 usando una función de mapeo.
+// Esta función tiene dos parámetros de tipo, T1 and T2.
+// Esto funciona con slices de cualquier tipo (especificado por "any").
+func Map[T1, T2 any](s []T1, f func(T1) T2) []T2 {
+    r := make([]T2, len(s))
+    for i, v := range s {
+        r[i] = f(v)
+    }
+    return r
+}
+
+words := []string{"hello", "world"}
+lengths := Map[string, int](words, func(word string) int {
+  return len(word)
+})
+fmt.Println(lengths) // [5 5]
+```
 
 <div id="tipos-genericos">
 
 ### Tipos Genéricos
 
-Hay otro lugar donde vamos a ver parámetros de tipos, y es en definiciones de tipos.
+Hay otro lugar donde vamos a ver parámetros de tipos, y es en definiciones de tipos o interfaces.
 
-Veamos la definición de una estructura conocida como `Conjunto`:
+Por ejemplo, si queremos definir la estructura `Tupla` que contiene dos elementos del mismo tipo:
 
 ```go
-type Conjunto[T comparable] map[T]struct {}
+type Tupla[T any] struct {
+  t1 T
+  t2 T
+}
+
+tupla := Tupla{t1: 1, t2: 2}
+```
+
+También podemos crear interfaces que contengan parámetros de tipos:
+
+```go
+type Sumable[T any] interface {
+  fmt.Stringer
+  Sumar(T) T
+}
+
+type Entero int
+
+func (e Entero) String() string {
+  return fmt.Sprintf("%d", e)
+}
+
+func (e Entero) Sumar(b Entero) Entero {
+  return e + b
+}
+
+func Suma[T Sumable[T]](a, b T) T {
+	return a.Sumar(b)
+}
+
+// Entero satisface la interfaz genérica Sumable
+fmt.Println(Suma[Entero](1, 100)) // 101
 ```
 
 ## Constraints
@@ -423,7 +475,7 @@ x := 1
 fmt.Println(reflect.TypeOf(x)) // int
 ```
 
-Y también lo soporta en Generics para simplificar las llamadas a funciones:
+Y también ofrece inferencia con Generics para simplificar las llamadas a funciones:
 
 ```go
 func Contiene[T comparable](t []T, v T) bool {
