@@ -8,7 +8,7 @@ Este repositorio contiene el código que vamos a usar en el workshop de [Golang 
 
 Uno de los grandes cambios introducidos últimamente en la version `1.18` es la implementación de _generics_ (tipos genéricos). La propuesta oficial fue conocida como [_type parameters_](https://go.googlesource.com/proposal/+/refs/heads/master/design/43651-type-parameters.md).
 
-Pero... ¿para qué?
+Pero... ¿para qué nos sirve esto?
 
 ## Sistema de Tipos de Go
 
@@ -144,6 +144,29 @@ calcularTotal(distancias)
 
 ### Notación
 
+```go
+// Define la función f con el parámetro de tipo T
+func f[T any](t T) {
+  // ...
+}
+
+// Llama a la función f especificando el parámetro int
+f[int](10)
+
+// Define una estructura con parámetro de tipo T
+type e[T any] struct {
+  t T
+}
+
+// Instancia la estructura especificando el parámetro de tipo int
+val := s[int]{t: 1}
+
+// Define una interface con el parámetro de tipo T
+type i[T any] interface {
+  HacerAlgo(t T) T
+}
+```
+
 ## Constraints
 
 Habrán notado en el ejemplo anterior la siguiente línea en la función `calcularTotal`:
@@ -233,11 +256,15 @@ Las operaciones permitidas para variables de tipo `any` son:
 
 #### comparable
 
-The new comparable keyword, in Go 1.18, was added for specifying types that can be compared with the == and != operators.
+La nueva keyword `comparable` se introdujo en la versión de Go `1.18` y sirve para especificar tipos que pueden compararse, esto es, pueden usar los operadores `==` y `!=`.
 
-comparable is an interface that is implemented by all comparable types (booleans, numbers, strings, pointers, channels, interfaces, arrays of comparable types, structs whose fields are all comparable types). The comparable interface may only be used as a type parameter constraint, not as the type of a variable.
+Casi todos los tipos built-in implementan la interfaz `comparable` (booleanos, números, strings, punteros, canales, interfaces, arreglos de tipos comparables, etc).
 
-Comparable types include: structs, pointers, interfaces, channels, and builtin types. comparable can also be embedded in other constraints since it is a constraint.
+Hay que tener en cuenta que solo puede usarse como una constraint en generics, y no como un tipo de una variable:
+
+```go
+var x comparable // error: cannot use type comparable outside a type constraint: interface is (or embeds) comparable
+```
 
 #### constraints package
 
@@ -334,6 +361,18 @@ fmt.Println(SumarCien(100))
 
 Retorna "200" como se esperaría.
 
+### Ventajas de usar Constraints
+
+Una de las principales ventajas que nos dan las constraints es que podemos definir la lista de tipos que permitimos en nuestra función en la misma declaración de generics:
+
+```go
+func Suma[A Sumable[A]](a, b A) A {
+  // Sabemos que podemos sumar a + b y obtendremos un tipo A
+}
+```
+
+En general, las constraints nos ayudan a escribir código más legible, testeable y mantenible.
+
 ## Inferencia de Tipos
 
 Go ofrece inferencia de tipos cuando usamos el operador `:=`:
@@ -383,7 +422,100 @@ func main() {
 }
 ```
 
+## Encadenamiento de Tipos (Type Chaining)
+
+_Type chaning_ es una técnica que nos permite definir tipos genéricos componiendo tipos definidos en la misma declaración.
+
+Por ejemplo:
+
+```go
+func MapToString[L ~E[], E fmt.Stringer](l L) []string {
+  resultado := make([]string, len(l))
+
+  for i, e := range l {
+    resultado[i] = e.String()
+  }
+
+  return resultado
+}
+```
+
+Acá estamos requiriendo que el tipo de `L` depende del tipo de `E` que es un `fmt.Stringer`, por lo tanto estamos _encadenando_ los tipos.
+
+### Inferencia de Tipos en Constraints (Constraint Type Inference)
+
+En el ejemplo de arriba, podemos notar como el parámetro de tipo `L` está definido como `~E[]` (un compuesto de `E`) y el tipo de `E` es un `fmt.Stringer`. `L` puede ser inferido sabiendo el tipo de `E` cuando se llama a la función `MapToString`.
+
+El compilador va a determinar el tipo de `L` cuando `MapToString` es llamado con el argumento. Por ejemplo, si implementásemos una struct `Persona` que satisfaga la interfaz `fmt.Stringer`:
+
+```go
+type Persona struct {
+  Name string
+}
+
+func (p Persona) String() string {
+  return fmt.Sprintf("%s", p.Name)
+}
+
+MapToString([]Persona{{Name: "Jack Sparrow"}})
+```
+
+El tipo de `L` será inferido como `[]Persona`.
+
 ## Generics Múltiples
+
+Go permite especificar parámetros de tipo múltiples, por ejemplo:
+
+```go
+func ImprimirValores[A int, B, C any, D ~int](a A, b B, c1, c2 C, d D) {
+  fmt.Printf("%v %v %v %v %v", a, b, c1, c2, d)
+}
+```
+
+Acá las restricciones van a ser que `A` es un `int`, `B` y `C` pueden ser cualquier cosa y `D` de cualquier tipo subyacente que represente un `int`, pero ademas los parámetros `c1` y `c2` tienen que ser del mismo tipo:
+
+```go
+ImprimirValores(1, 2.0, "3", 4, 5) // error: mismatched types untyped string and untyped int (cannot infer C)
+```
+
+Dado que el tercer argumento `c1` es de tipo `string` y el cuarto `c2` de tipo `int`, pero los type parameters requieren que sean del mismo tipo:
+
+```go
+ImprimirValores(1, 2.0, "3", "4", 5) // 1 2 3 4 5
+```
+
+Notar que si especificamos tipos, debemos siempre completar los de la izquierda (no podemos saltearnos argumentos de tipos):
+
+```go
+ImprimirValores[int, float32, string](1, 2.0, "3", "4", 5) // 1 2 3 4 5
+```
+
+⚠️ Cuidado con definir varios parámetros de tipo si queremos especificar que sean iguales:
+
+```go
+func Iguales[T1, T2 comparable](a T1, b T2) bool {
+  return a == b
+}
+
+var a int = 1
+var b int = 2
+
+Iguales(a, b) // error: invalid operation: a == b (mismatched types T1 and T2)
+```
+
+Una correcta definición sería garantizando que son del mismo tipo:
+
+```go
+func Iguales[T comparable](a, b T) bool {
+  return a == b
+}
+
+var a int = 1
+var b int = 2
+
+Iguales(a, b) // false
+Iguales(a, 1) // true
+```
 
 ## Interfaces versus Generics
 
