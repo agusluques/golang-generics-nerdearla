@@ -439,9 +439,32 @@ func Resta[T Integer](a, b T) T {
 
 #### Combinaciones
 
-```go
-type Integer interface {
+Podemos combinar todas las constraints vistas hasta este momento en una interfaz:
 
+```go
+type ValorMoneda interface {
+	~int | ~int64
+}
+
+type Moneda interface {
+	ValorMoneda
+	ISO4127Code() string
+	Decimal() int
+}
+
+type ARS int64
+
+func ImprimirBalance[T Moneda](m T) {
+	balance := float64(m) / math.Pow10(m.Decimal())
+	fmt.Printf("%.*f %s\n", m.Decimal(), balance, m.ISO4127Code())
+}
+
+func (a ARS) ISO4127Code() string {
+	return "ARS"
+}
+
+func (a ARS) Decimal() int {
+	return 2
 }
 ```
 
