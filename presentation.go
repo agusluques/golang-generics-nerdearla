@@ -1,6 +1,21 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"reflect"
+)
+
+/*****************************************************
+************** BEFORE GENERICS ***********************
+******************************************************/
+
+func PrintArrays() {
+	arrayOfInts := []int{1, 2, 3}
+	arrayOfStrings := []string{"1", "2", "3"}
+
+	fmt.Println("Array of ints size: ", len(arrayOfInts))
+	fmt.Println("Array of strings size: ", len(arrayOfStrings))
+}
 
 func PrintValue(myInterface interface{}) {
 	switch v := myInterface.(type) { // HL
@@ -18,3 +33,119 @@ func PrintValue(myInterface interface{}) {
 		fmt.Printf("I don't know, ask stackoverflow.")
 	}
 }
+
+/*****************************************************
+******************************************************
+******************************************************/
+
+/*****************************************************
+***************** SYNTAX *****************************
+******************************************************/
+
+// START SYNTAX1 OMIT
+// Define la función f con el parámetro de tipo T
+func f[T any](t T) { // HL
+
+}
+
+func callF() {
+	// Llama a la función f especificando el parámetro int
+	f[int](10) // HL
+}
+
+// END SYNTAX1 OMIT
+
+// START SYNTAX2 OMIT
+// Define una estructura con parámetro de tipo T
+type e[T any] struct { // HL
+	t T // HL
+}
+
+func useE() {
+	// Instancia la estructura especificando el parámetro de tipo int
+	val := e[int]{ // HL
+		t: 1,
+	}
+	fmt.Println(val)
+}
+
+// END SYNTAX2 OMIT
+
+// START SYNTAX3 OMIT
+// Define una interface con el parámetro de tipo T
+type i[T any] interface { // HL
+	HacerAlgo(t T) T // HL
+}
+
+// END SYNTAX3 OMIT
+
+/*****************************************************
+******************************************************
+******************************************************/
+
+/*****************************************************
+************ TYPE PARAMENTERS FUNC *******************
+******************************************************/
+
+func MapStringsToStrings(input []string, f func(string) string) []string {
+	result := make([]string, len(input))
+	for i, v := range input {
+		result[i] = f(v)
+	}
+	return result
+}
+
+func MapIntsToInts(input []int, f func(int) int) []int {
+	result := make([]int, len(input))
+	for i, v := range input {
+		result[i] = f(v)
+	}
+	return result
+}
+
+/*****************************************************
+******************************************************
+******************************************************/
+
+/*****************************************************
+***************** WHEN TO USE ************************
+******************************************************/
+
+func Map[T1, T2 any](s []T1, f func(T1) T2) []T2 {
+	r := make([]T2, len(s))
+	for i, v := range s {
+		r[i] = f(v)
+	}
+	return r
+}
+
+// START WHEN1 OMIT
+type Tree[T any] struct {
+	left, right *Tree[T]
+	value       T
+}
+
+func (t *Tree[T]) Search(x T) *Tree[T]
+
+var stringTree *Tree[string]
+
+// END WHEN1 OMIT
+
+func GetStringFrom(a interface{}) string {
+	reflected := reflect.ValueOf(a)
+
+	switch reflected.Kind() {
+	case reflect.Int, reflect.Int8, reflect.Int16, reflect.Int32, reflect.Int64:
+		return fmt.Sprintf("%d", reflected.Int())
+	case reflect.Float32, reflect.Float64:
+		return fmt.Sprintf("%f", reflected.Float())
+	case reflect.String:
+		return reflected.String()
+	default:
+		return fmt.Sprintf("%v", a)
+	}
+}
+
+/*****************************************************
+******************************************************
+******************************************************/

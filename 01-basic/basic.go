@@ -15,6 +15,6 @@ func GetStringFromString(a string) string {
 }
 
 // Rewrite this function using generics
-func GetStringFrom(a any) string {
+func GetStringFrom(a interface{}) string {
 	return fmt.Sprintf("%v", a)
 }

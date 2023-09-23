@@ -24,58 +24,161 @@ ndel314@gmail.com
 
 1. Introducción
 1. Sintaxis
-1. Type Parameters in **Functions**
+1. Type Parameters en **Funciones**
 1. Constraints Literals
 1. Constraints Package
 1. Tilde (`~`)
-1. Type Parameters in **Types**
+1. Type Parameters en **Tipos**
 1. Type Inference
+1. Limitaciones
+1. Cuándo sí y cuándo no usar Generics
 
 ## Introducción
 
-Los _Generics_ fueron introducidos en Go `v1.18`
+Los _Generics_ (o _type parameters_) fueron introducidos en Go `v1.18`
 
-**Antes de Generics**
+**Seguro? 🤔**
 
-Se podia utilizar `interface{}` or `any`
+Previo a `v1.18` se podia utilizar `len`, `cap`, `make`.
+
+También los `maps`, `slices` y `channels` aceptaban cualquier tipo
+
+.code presentation.go /^func PrintArrays/,/^}/
+
+## Introducción
+
+Se podia utilizar `interface{}`
 
 .code presentation.go /^func PrintValue/,/^}/
 
-## Sintaxis
+## Introducción
+
+Así es como en la `v1.18` deciden darle el mismo poder a los desarrolladores
+
+.image assets/generics.png  _ 600
 
 ## Sintaxis
 
-Seccion de sintaxis
-
-.code 01-basic/basic.go /^func GetStringFromInt\(a int\) string {$/,/^}/
+.code presentation.go /START SYNTAX1 OMIT/,/END SYNTAX1 OMIT/
 
 ## Sintaxis
 
-Seccion de sintaxis
+.code presentation.go /START SYNTAX2 OMIT/,/END SYNTAX2 OMIT/
 
-## Type Parameters in Functions
+## Sintaxis
+
+.code presentation.go /START SYNTAX3 OMIT/,/END SYNTAX3 OMIT/
+
+## Sintaxis
+
+.image assets/pala.png _ 400
+
+Ejercicio 1 - Basic
+
+## Type Parameters en Funciones
+
+**Problemas previo a Generics**
+
+Funciones que hacian escencialmente lo mismo para distintos tipos
+
+Generaba codigo repetido porque terminábamos copiando y pegando la misma definición para los distintos tipos
+
+.code presentation.go /^func MapStringsToStrings/,/^}/
+
+.code presentation.go /^func MapIntsToInts/,/^}/
+
+## Type Parameters en Funciones
+
+.image assets/pala.png _ 400
+
+Ejercicio 2 - Type Parameters en Funciones
 
 ## Constraints Literals
 
-.code 04-contraints-literals/literals.go /START1 OMIT/,/END1 OMIT/
+Los tipos genericos no siempre son `any`. 
+
+Se pueden restringir a un conjunto de tipos (o _type sets_)
+
+.code contraints-literals/literals.go /START1 OMIT/,/END1 OMIT/
 
 ## Constraints Literals
 
-.code 04-contraints-literals/literals.go /START2 OMIT/,/END2 OMIT/
+.code contraints-literals/literals.go /START2 OMIT/,/END2 OMIT/
 
 ## Constraints Literals
 
-.code 04-contraints-literals/literals.go /START3 OMIT/,/END3 OMIT/
+.code contraints-literals/literals.go /START3 OMIT/,/END3 OMIT/
 
 ## Constraints Literals
 
-.code 04-contraints-literals/literals.go /START4 OMIT/,/END4 OMIT/
+.code contraints-literals/literals.go /START4 OMIT/,/END4 OMIT/
+
+.image assets/type-sets.png _ 900
 
 ## Constraints Package
 
+Definir todos los tipos que aceptamos puede ser medio tedioso
+
+.image assets/lazy-gopher.png _ 710
+
+## Constraints Package
+
+.image assets/pala.png _ 400
+
+Ejercicio 3 - Constraints Package
+
 ## Tilde (~)
 
+.image assets/pala.png _ 400
+
+Ejercicio 4 - Tilde (~)
+
+## Type Parameters en Tipos
+
+Hay otro lugar donde vamos a ver parámetros de tipos, y es en definiciones de tipos o interfaces.
+
+```
+type Tupla[T any] struct {
+  t1 T
+  t2 T
+}
+
+tupla := Tupla{t1: 1, t2: 2}
+```
+
 ## Type Parameters in Types
+
+También podemos crear interfaces que contengan parámetros de tipos:
+
+```go
+type Sumable[T any] interface {
+  fmt.Stringer
+  Sumar(T) T
+}
+
+type Entero int
+
+func (e Entero) String() string {
+  return fmt.Sprintf("%d", e)
+}
+
+func (e Entero) Sumar(b Entero) Entero {
+  return e + b
+}
+
+func Suma[T Sumable[T]](a, b T) T {
+	return a.Sumar(b)
+}
+
+// Entero satisface la interfaz genérica Sumable
+fmt.Println(Suma[Entero](1, 100)) // 101
+```
+
+## Type Parameters en Tipos
+
+.image assets/pala.png _ 400
+
+Ejercicio 5 - Generics Types
 
 ## Type Inference
 
@@ -83,23 +186,114 @@ Go puede inferir el tipo sin tener que especificarlo
 
 **Partial inference**
 
-.code 07-type-inference/inference.go
+.code type-inference/inference.go
 
 ## Type Inference Advanced
 
-## Known Issues
+.image assets/pala.png _ 400
 
-.code 09-common-struct-fields/common_fields.go 
+Ejercicio 6 - Type Inference Advanced
 
-## Known Issues
+## Limitaciones
+
+.code 07-common-struct-fields/common_fields.go 
+
+## Limitaciones
 
 .image assets/github-issue-1.png _ 1000
 .image assets/github-issue-2.png _ 1000
 .caption [[https://github.com/golang/go/issues/48522][Github Issue]]
 
-## Known Issues
+## Limitaciones
 
 .image assets/go-1.18-doc.png _ 1000
 .caption [[https://go.dev/doc/go1.18][Go v1.18]]
 
-## When to use Generics
+## Más Limitaciones
+
+Una declaración de alias de tipo no puede tener un parámetro de tipo:
+
+```go
+type T[X, Y any] func(X) Y
+
+type A = T[int, string] // ok
+
+type B[X any] = T[X, X] // error: generic type cannot be alias
+```
+
+## Más Limitaciones
+
+Una declaración de alias de tipo no puede tener un _type parameters_
+
+```go
+type T[X, Y any] func(X) Y
+
+type A = T[int, string] // ok
+
+type B[X any] = T[X, X] // error: generic type cannot be alias
+```
+
+## Más Limitaciones
+
+Actualmente los métodos no soportan _type parameters_
+
+```go
+type Moneda struct {
+  valor int
+}
+
+func (m *Moneda) Valor[T ~int]() T {
+  return m.valor // syntax error: method must have no type parameters
+}
+```
+
+.caption [[https://github.com/golang/go/issues/49085][Github Issue]]
+
+## Más Limitaciones
+
+Los estructuras embebidas no pueden provenir de _type parameters_
+
+```go
+type Derived[Base any] struct {
+	Base // error: embedded field type cannot be a (pointer to a) type parameter
+	x bool
+}
+
+## Cuándo sí y cuándo no usar Generics
+
+Funciones de propósito general
+
+.code presentation.go /^func Map\[T1, T2 any\]/,/^}/
+
+.image assets/gopher-ok.png _ 450
+
+## Cuándo sí y cuándo no usar Generics
+
+Estructuras de datos de propósito general
+
+.code presentation.go /START WHEN1 OMIT/,/END WHEN1 OMIT/
+
+.image assets/gopher-ok.png _ 450
+
+## Cuándo sí y cuándo no usar Generics
+
+Cuando no agrega valor, lo hace difícil de leer o menos performante.
+
+O simplemente llamamos a un método del parámetro
+
+```
+func ReadSome(r io.Reader) ([]byte, error) 
+
+func ReadSome[T io.Reader](r T) ([]byte, error) 
+
+```
+
+.image assets/gopher-no.png _ 450
+
+## Cuándo sí y cuándo no usar Generics
+
+Cuando la implementación varía según el tipo
+
+.code presentation.go /^func GetStringFrom/,/^}/
+
+.image assets/gopher-no.png _ 250
