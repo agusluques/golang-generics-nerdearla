@@ -412,6 +412,31 @@ fmt.Println(SumarMil(p))
 
 #### Unions
 
+También podemos definir uniones de tipos, que representan la unión de los conjuntos de valores que puede aceptar un tipo `T`, por ejemplo:
+
+```go
+func Resta[T int | uint](a, b T) T {
+	return a - b
+}
+
+var a uint = 10
+var b uint = 2
+
+Resta(a,b) // 8
+```
+
+Una notación conveniente es usar interfaces para expresar union types, por ejemplo:
+
+```go
+type Integer interface {
+  int | uint
+}
+
+func Resta[T Integer](a, b T) T {
+  return a - b
+}
+```
+
 #### Combinaciones
 
 ```go
