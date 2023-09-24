@@ -10,11 +10,11 @@ import (
 ******************************************************/
 
 func PrintArrays() {
-	arrayOfInts := []int{1, 2, 3}
-	arrayOfStrings := []string{"1", "2", "3"}
+	arrayOfInts := make([]int, 3)
+	arrayOfStrings := make([]string, 3)
 
-	fmt.Println("Array of ints size: ", len(arrayOfInts))
-	fmt.Println("Array of strings size: ", len(arrayOfStrings))
+	fmt.Printf("len=%d cap=%d %v\n", len(arrayOfInts), cap(arrayOfInts), arrayOfInts)
+	fmt.Printf("len=%d cap=%d %v\n", len(arrayOfStrings), cap(arrayOfStrings), arrayOfStrings)
 }
 
 func PrintValue(myInterface interface{}) {

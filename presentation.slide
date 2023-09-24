@@ -5,7 +5,7 @@ Agustin Luques
 HomeVision
 luquesagustin@gmail.com
 
-Nicolás del Piano
+Nicolás Del Piano
 HomeVision
 ndel314@gmail.com
 
@@ -37,17 +37,26 @@ ndel314@gmail.com
 
 Los _Generics_ (o _type parameters_) fueron introducidos en Go `v1.18`
 
-**Seguro? 🤔**
+.image assets/proposal.png _ 800
 
-Previo a `v1.18` se podia utilizar `len`, `cap`, `make`.
+https://go.googlesource.com/proposal/+/refs/heads/master/design/43651-type-parameters.md
 
-También los `maps`, `slices` y `channels` aceptaban cualquier tipo
+## Introducción
+
+Pero... ¿Qué había antes 🤔?
+
+Desde la versión inicial de Go `1.0`, tenemos generics built-in (limitados)
+
+```go
+new len cap make close // funciones
+map channel [] // tipos o constructores de tipos
+```
 
 .code presentation.go /^func PrintArrays/,/^}/
 
 ## Introducción
 
-Se podia utilizar `interface{}`
+Podemos usar `interface{}` para representar cualquier valor y chequear el tipo concreto con _type assertions_
 
 .code presentation.go /^func PrintValue/,/^}/
 
