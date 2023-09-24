@@ -104,7 +104,7 @@ Ejercicio 2 - Type Parameters en Funciones
 
 ## Constraints Literals
 
-Los tipos genericos no siempre son `any`. 
+Los tipos genéricos no siempre son `any`
 
 Se pueden restringir a un conjunto de tipos (o _type sets_)
 
@@ -126,15 +126,44 @@ Se pueden restringir a un conjunto de tipos (o _type sets_)
 
 ## Constraints Package
 
-Definir todos los tipos que aceptamos puede ser medio tedioso
+Definir constraints puede ser medio tedioso
 
-.image assets/lazy-gopher.png _ 710
+Mas que nada aquellas constraints que suelen repetirse (`Integer`, `Ordered`, etc)
+
+Es por eso que los desarrolladores incluyeron un paquete que define las más comunes
+
+.image assets/constraints-package.png _ 800
 
 ## Constraints Package
 
 .image assets/pala.png _ 400
 
 Ejercicio 3 - Constraints Package
+
+## Tilde (~)
+
+Uno de los nuevos operadores anunciados en Go `1.18` fue el operador ~
+
+Fue agregado para que un tipo genérico permita cualquier tipo dentro de la constraint
+
+## Tilde (~)
+
+```go
+type ID int64
+
+func Process[T int64](value T) {
+  // ...
+}
+
+var id ID = 10
+Process(id) // error ❌: ID does not satisfy int64 (possibly missing ~ for int64 in int64)
+
+func ProcessFixed[T ~int16](value T) {
+  // ...
+}
+
+Process(id) // OK ✅
+```
 
 ## Tilde (~)
 
