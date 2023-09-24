@@ -14,7 +14,9 @@ func GetStringFromString(a string) string {
 	return a
 }
 
-// Rewrite this function using generics
+// ✏️ Ejercicio 1:
+// - Reescribir esta función utilizando generics
+// - Verificar que los tests pasen
 func GetStringFrom(a interface{}) string {
 	return fmt.Sprintf("%v", a)
 }

@@ -2,7 +2,7 @@ package constraints
 
 // ✏️ Ejercicio 1:
 // - Generalizar la funcion "Suma" tal que podamos sumar todos los tipos numéricos
-// de Go (ints y flotantes)
+// de Go (int, int8, int16, int32, int64, float64)
 // - Verificar que los tests pasen
 func Suma(a, b int) int {
 	return a + b
