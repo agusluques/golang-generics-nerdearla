@@ -673,9 +673,9 @@ Una declaración de alias de tipo no puede tener un parámetro de tipo:
 ```go
 type T[X, Y any] func(X) Y
 
-type A = T[int, string] // ok
+type A = T[int, string] // OK
 
-type B[X any] = T[X, X] // error: generic type cannot be alias
+type B[X any] = T[X, X] // Error: generic type cannot be alias
 ```
 
 ### ❌ Métodos Genéricos
