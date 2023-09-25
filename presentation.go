@@ -45,12 +45,13 @@ func PrintValue(myInterface interface{}) {
 // START SYNTAX1 OMIT
 // Define la función f con el parámetro de tipo T
 func f[T any](t T) { // HL
-
+	// ...
 }
 
 func callF() {
 	// Llama a la función f especificando el parámetro int
-	f[int](10) // HL
+	f[int](10)                   // HL
+	f[string]("hola Nerdearla!") // HL
 }
 
 // END SYNTAX1 OMIT

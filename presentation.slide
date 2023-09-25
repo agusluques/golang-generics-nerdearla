@@ -60,6 +60,9 @@ Podemos usar `interface{}` para representar cualquier valor y chequear el tipo c
 
 .code presentation.go /^func PrintValue/,/^}/
 
+: Tiempo de ejecución
+: Hay que chequear todos los casos
+
 ## Introducción
 
 Así es como en la `v1.18` deciden darle el mismo poder a los desarrolladores
@@ -68,7 +71,43 @@ Así es como en la `v1.18` deciden darle el mismo poder a los desarrolladores
 
 ## Sintaxis
 
+```go
+func fInt(t int) {
+  // ...
+}
+
+func fString(t string) {
+  // ...
+}
+
+func callF() {
+  fInt(10)
+  fString("hola Nerdearla!")
+}
+```
+
+## Sintaxis
+
 .code presentation.go /START SYNTAX1 OMIT/,/END SYNTAX1 OMIT/
+
+## Sintaxis
+
+```go
+type eInt struct {
+  t int
+}
+
+type eString struct {
+  t string
+}
+
+func useE() {
+    valEInt := eInt{ t: 1 }
+    valEString := eString{ t: "hola Nerdearla!" }
+    fmt.Println(valEInt.t)
+    fmt.Println(valEString.t)
+}
+```
 
 ## Sintaxis
 
