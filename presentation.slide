@@ -269,13 +269,13 @@ Ejercicio 6 - Type Inference Advanced
 
 ## Limitaciones
 
-.code 07-common-struct-fields/common_fields.go 
+.code common-struct-fields/common_fields.go 
 
 ## Limitaciones
 
 .image assets/github-issue-1.png _ 1000
 .image assets/github-issue-2.png _ 1000
-.caption [[https://github.com/golang/go/issues/48522][Github Issue]]
+.caption [[https://github.com/golang/go/issues/48522][GitHub Issue]]
 
 ## Limitaciones
 

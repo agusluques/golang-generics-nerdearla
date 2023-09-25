@@ -11,7 +11,7 @@ type Point struct {
 }
 
 func GetX[P interface{ Rect | Point }](p P) int {
-	return p.X // HL
+	return p.X // error ❌: p.X undefined (type P has no field or method X)
 }
 
 func main() {
