@@ -143,9 +143,11 @@ Ejercicio 2 - Type Parameters en Funciones
 
 ## Constraints Literals
 
-Los tipos genéricos no siempre son `any`
+Los tipos genéricos no siempre son cualquier tipo
 
 Se pueden restringir a un conjunto de tipos (o _type sets_)
+
+Se usa el operador `|` para "unir" tipos:
 
 .code contraints-literals/literals.go /START1 OMIT/,/END1 OMIT/
 
@@ -156,6 +158,8 @@ Se pueden restringir a un conjunto de tipos (o _type sets_)
 ## Constraints Literals
 
 .code contraints-literals/literals.go /START3 OMIT/,/END3 OMIT/
+
+.code contraints-literals/literals.go /START3-any OMIT/,/END3-any OMIT/
 
 ## Constraints Literals
 
@@ -171,7 +175,7 @@ Mas que nada aquellas constraints que suelen repetirse (`Integer`, `Ordered`, et
 
 Es por eso que los desarrolladores incluyeron un paquete que define las más comunes
 
-.image assets/constraints-package.png _ 800
+.image assets/lazy-gopher.png _ 450
 
 ## Constraints Package
 
@@ -183,7 +187,7 @@ Ejercicio 3 - Constraints Package
 
 Uno de los nuevos operadores anunciados en Go `1.18` fue el operador ~
 
-Fue agregado para que un tipo genérico permita cualquier tipo dentro de la constraint
+Fue agregado para que un tipo genérico permita cualquier tipo subyacente dentro de una constraint
 
 ## Tilde (~)
 
@@ -196,12 +200,6 @@ func Process[T int64](value T) {
 
 var id ID = 10
 Process(id) // error ❌: ID does not satisfy int64 (possibly missing ~ for int64 in int64)
-
-func ProcessFixed[T ~int16](value T) {
-  // ...
-}
-
-Process(id) // OK ✅
 ```
 
 ## Tilde (~)
@@ -220,27 +218,22 @@ type Tupla[T any] struct {
   t2 T
 }
 
-tupla := Tupla{
+tupla := Tupla[int]{
   t1: 1,
   t2: 2
 }
 ```
 
-## Type Parameters in Types
+## Type Parameters en Tipos
 
 También podemos crear interfaces que contengan parámetros de tipos:
 
 ```go
 type Sumable[T any] interface {
-  fmt.Stringer
   Sumar(T) T
 }
 
 type Entero int
-
-func (e Entero) String() string {
-  return fmt.Sprintf("%d", e)
-}
 
 func (e Entero) Sumar(b Entero) Entero {
   return e + b
