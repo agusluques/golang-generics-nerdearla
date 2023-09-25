@@ -39,7 +39,7 @@ Los _Generics_ (o _type parameters_) fueron introducidos en Go `v1.18`
 
 .image assets/proposal.png _ 800
 
-https://go.googlesource.com/proposal/+/refs/heads/master/design/43651-type-parameters.md
+.caption [[https://go.googlesource.com/proposal/+/refs/heads/master/design/43651-type-parameters.md][Proposal]]
 
 ## Introducción
 
@@ -59,9 +59,6 @@ map channel [] // tipos o constructores de tipos
 Podemos usar `interface{}` para representar cualquier valor y chequear el tipo concreto con _type assertions_
 
 .code presentation.go /^func PrintValue/,/^}/
-
-: Tiempo de ejecución
-: Hay que chequear todos los casos
 
 ## Introducción
 
@@ -112,6 +109,14 @@ func useE() {
 ## Sintaxis
 
 .code presentation.go /START SYNTAX2 OMIT/,/END SYNTAX2 OMIT/
+
+## Sintaxis
+
+```go
+type i interface {
+    HacerAlgo(t int) int
+}
+```
 
 ## Sintaxis
 
