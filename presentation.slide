@@ -117,12 +117,6 @@ func useE() {
 
 .code presentation.go /START SYNTAX3 OMIT/,/END SYNTAX3 OMIT/
 
-## Sintaxis
-
-.image assets/pala.png _ 400
-
-Ejercicio 1 - Basic
-
 ## Type Parameters en Funciones
 
 **Problemas previo a Generics**
@@ -139,7 +133,7 @@ Generaba código repetido porque terminábamos copiando y pegando la misma defin
 
 .image assets/pala.png _ 400
 
-Ejercicio 2 - Type Parameters en Funciones
+Ejercicio 1 - Type Parameters en Funciones
 
 ## Constraints Literals
 
@@ -181,7 +175,7 @@ Es por eso que los desarrolladores incluyeron un paquete que define las más com
 
 .image assets/pala.png _ 400
 
-Ejercicio 3 - Constraints Package
+Ejercicio 2 - Constraints Package
 
 ## Tilde (~)
 
@@ -206,7 +200,7 @@ Process(id) // error ❌: ID does not satisfy int64 (possibly missing ~ for int6
 
 .image assets/pala.png _ 400
 
-Ejercicio 4 - Tilde (~)
+Ejercicio 3 - Tilde (~)
 
 ## Type Parameters en Tipos
 
@@ -251,7 +245,7 @@ fmt.Println(Suma[Entero](1, 100)) // 101
 
 .image assets/pala.png _ 400
 
-Ejercicio 5 - Generics Types
+Ejercicio 4 - Generics Types
 
 ## Type Inference
 
@@ -265,7 +259,7 @@ Go puede inferir el tipo sin tener que especificarlo
 
 .image assets/pala.png _ 400
 
-Ejercicio 6 - Type Inference Advanced
+Ejercicio 5 - Type Inference Advanced
 
 ## Limitaciones
 
