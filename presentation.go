@@ -88,16 +88,16 @@ type i[T any] interface { // HL
 ************ TYPE PARAMENTERS FUNC *******************
 ******************************************************/
 
-func MapStringsToStrings(input []string, f func(string) string) []string {
-	result := make([]string, len(input))
+func MapStrings(input []string, f func(string) interface{}) []interface{} { // HL
+	result := make([]interface{}, len(input))
 	for i, v := range input {
 		result[i] = f(v)
 	}
 	return result
 }
 
-func MapIntsToInts(input []int, f func(int) int) []int {
-	result := make([]int, len(input))
+func MapInts(input []int, f func(int) interface{}) []interface{} { // HL
+	result := make([]interface{}, len(input))
 	for i, v := range input {
 		result[i] = f(v)
 	}

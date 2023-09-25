@@ -127,13 +127,13 @@ Ejercicio 1 - Basic
 
 **Problemas previo a Generics**
 
-Funciones que hacian escencialmente lo mismo para distintos tipos
+Funciones que hacían escencialmente lo mismo para distintos tipos
 
-Generaba codigo repetido porque terminábamos copiando y pegando la misma definición para los distintos tipos
+Generaba código repetido porque terminábamos copiando y pegando la misma definición para los distintos tipos
 
-.code presentation.go /^func MapStringsToStrings/,/^}/
+.code presentation.go /^func MapStrings/,/^}/
 
-.code presentation.go /^func MapIntsToInts/,/^}/
+.code presentation.go /^func MapInts/,/^}/
 
 ## Type Parameters en Funciones
 
