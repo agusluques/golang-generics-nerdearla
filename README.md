@@ -570,7 +570,7 @@ _Type chaning_ es una técnica que nos permite definir tipos genéricos componie
 Por ejemplo:
 
 ```go
-func MapToString[L ~E[], E fmt.Stringer](l L) []string {
+func MapToString[L ~[]E, E fmt.Stringer](l L) []string {
   resultado := make([]string, len(l))
 
   for i, e := range l {
