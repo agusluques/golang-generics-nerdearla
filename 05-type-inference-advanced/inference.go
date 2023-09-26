@@ -8,8 +8,9 @@ import (
 
 // ✏️ Ejercicio 1:
 // - Investigar el error de la llamada al método `Print`
-// - Hint: chequear cual es el tipo que está infiriendo el compilador
-func ScaleAllElements[I constraints.Integer](list []I, factor I) []I {
+// - Solucionar el error
+// - 👀 Hint: chequear cual es el tipo que está infiriendo el compilador
+func Scale[I constraints.Integer](list []I, factor I) []I {
 	for i := range list {
 		list[i] *= factor
 	}
@@ -24,10 +25,6 @@ func (is IntSlice) Print() {
 
 func main() {
 	listOfInts := []int{1, 2, 3}
-	fmt.Println(ScaleAllElements(listOfInts, 2))
-
-	listOfInts2 := IntSlice{1, 2, 3}
-	fmt.Println(ScaleAllElements(listOfInts2, 2))
-	listOfInts2.Print()
-	ScaleAllElements(listOfInts2, 2).Print()
+	fmt.Println(Scale(listOfInts, 2))
+	listOfInts.Print()
 }
