@@ -70,59 +70,7 @@ Así es como en la `v1.18` deciden darle el mismo poder a los desarrolladores
 
 ## Sintaxis
 
-```go
-func fInt(t int) {
-  // ...
-}
-
-func fString(t string) {
-  // ...
-}
-
-func callF() {
-  fInt(10)
-  fString("hola Nerdearla!")
-}
-```
-
-## Sintaxis
-
-.code presentation.go /START SYNTAX1 OMIT/,/END SYNTAX1 OMIT/
-
-## Sintaxis
-
-```go
-type eInt struct {
-  t int
-}
-
-type eString struct {
-  t string
-}
-
-func useE() {
-    valEInt := eInt{ t: 1 }
-    valEString := eString{ t: "hola Nerdearla!" }
-    fmt.Println(valEInt.t)
-    fmt.Println(valEString.t)
-}
-```
-
-## Sintaxis
-
-.code presentation.go /START SYNTAX2 OMIT/,/END SYNTAX2 OMIT/
-
-## Sintaxis
-
-```go
-type i interface {
-    HacerAlgo(t int) int
-}
-```
-
-## Sintaxis
-
-.code presentation.go /START SYNTAX3 OMIT/,/END SYNTAX3 OMIT/
+.image assets/pala.png _ 400
 
 ## Type Parameters en Funciones
 
