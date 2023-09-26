@@ -22,14 +22,8 @@ func NewTrack(title string, talks []Talk) Track {
 	return Track{title, talks}
 }
 
-// Gets first talk and removes it from the list
-func (t *Track) NextTalk() (*Talk, bool) {
-	if len(t.talks) == 0 {
-		return nil, false
-	}
-	next := t.talks[0]
-	t.talks = t.talks[1:]
-	return &next, true
+func (t *Track) GetTalks() []Talk {
+	return t.talks
 }
 
 func main() {
@@ -40,18 +34,12 @@ func main() {
 	}
 
 	// workshops := []Workshop{
-	// 	{"Generics in Go", []string{"Agus", "Nico"}, ""},
-	// 	{"Building a CI/CD pipeline", []string{"Matias", "Jorge"}, ""},
-	// 	{"Working with Kubernetes", []string{"Ari", "Rafa"}, ""},
+	// 	{"Generics in Go", []string{"Agus", "Nico"}, "https://github.com/agusluques/golang-generics-nerdearla"},
+	// 	{"Building a CI/CD pipeline", []string{"Matias", "Jorge"}, "https://github.com/mati/ci-cd-pipeline"},
+	// 	{"Working with Kubernetes", []string{"Ari", "Rafa"}, "https://github.com/rafinha/kubertenes-workshop"},
 	// }
 
 	track := NewTrack("Dev", talks)
 
-	for {
-		talk, ok := track.NextTalk()
-		if !ok {
-			break
-		}
-		fmt.Printf("%+v\n", talk)
-	}
+	fmt.Printf("%+v\n", track.GetTalks())
 }
