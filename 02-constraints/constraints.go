@@ -2,7 +2,7 @@ package constraints
 
 // ✏️ Ejercicio 1:
 // - Generalizar la funcion "Suma" tal que podamos sumar todos los tipos numéricos
-// de Go (int, int8, int16, int32, int64, float64)
+// de Go (int, int16, int32, int64, float32, float64)
 // - Verificar que los tests pasen
 func Suma(a, b int) int {
 	return a + b
@@ -23,7 +23,7 @@ func Min(a, b int) int {
 // - Escribir la función "GenMin" usando el paquete constraints para definir el
 // type parameter
 // - Verificar que los tests pasen
-// 💡 Puedes utilizar la intefaz `constraints.Ordered`
+// 💡 Puedes utilizar la interfaz `constraints.Ordered`
 func GenMin(a, b int) int {
 	if a < b {
 		return a
