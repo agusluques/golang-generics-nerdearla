@@ -90,7 +90,6 @@ Generaba código repetido porque terminábamos copiando y pegando la misma defin
 
 Ejercicio 1 - Type Parameters en Funciones
 
-
 ## Constraints Literals
 
 Los tipos genéricos no siempre son cualquier tipo

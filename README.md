@@ -334,18 +334,18 @@ El compilador va a tirar el siguiente error:
 
 El punto débil de usar `any` como constraint es que no podemos asumir nada sobre el tipo: puede ser cualquiera, lo cual nos limita a la hora de definir una función.
 
-Las operaciones permitidas para variables de tipo `any` son:
+Las operaciones permitidas para variables de tipo `any` son las siguientes:
 
-- Declarar variables de ese tipo
+- Declaraciones de variables de ese tipo
 - Asignaciones
-- Usarlas en parámetros y valores de retorno
-- Obtener la dirección de esas variables
-- convert or assign values of those types to the type interface{}
-- convert a value of type T to type T (permitted but useless)
-- use a type assertion to convert an interface value to the type
-- use the type as a case in a type switch
-- define and use composite types that use those types, such as a slice of that type
-- pass the type to some predeclared functions such as new
+- Usos en parámetros y valores de retorno
+- Obtención de la dirección de esas variables
+- Conversión o asignación de los valores de esos tipos al tipo `interface{}`
+- Conversión a un valor del tipo `T` a `T`
+- Uso de _type assertion_ para convertir un valor de tipo `interface{}` al tipo que se quiera
+- Uso de `type` como `case` en un `switch` de tipos
+- Definición y uso de tipos compuestos que usan esos tipos, como `[]T`
+- Uso de tipo en funciones predeclaradas como `new`
 
 #### comparable
 
@@ -361,15 +361,15 @@ var x comparable // error: cannot use type comparable outside a type constraint:
 
 #### constraints package
 
-The Go team created a package of constraints (constraints) that can be imported and used for the most generic of contraint types. One important constraint is constraints.Ordered, which allows the use of the <, <=, >, and >= operators.
+The Go team created a package of constraints (constraints) that can be imported and used for the most generic of contraint types. One important constraint is constraints.Ordered, which allows the use of the
+
+El equipo de Go definió un paquete de restricciones (_constraints_) que se pueden importar y usar en la gran mayoría de los tipos con restricciones. Una restricción importante es `constraints.Ordered`, que permite el uso de los operadores `<`, `<=`, `>` y `>=`.
 
 ```go
 type Ordered interface {
         Integer | Float | ~string
 }
 ```
-
-The definition of the above Ordered constraint makes sense it would allow the use of the <, <=, >, and >= operators since these types are normally comparable outside of a generic scope.
 
 #### Underlying Types
 
