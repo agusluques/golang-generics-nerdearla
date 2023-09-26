@@ -10,7 +10,7 @@ import (
 // - Investigar el error de la llamada al método `Print`
 // - Solucionar el error
 // - 👀 Hint: chequear cual es el tipo que está infiriendo el compilador
-func Scale[I constraints.Integer, T ~[]I](list T, factor I) T {
+func Scale[I constraints.Integer](list []I, factor I) []I {
 	for i := range list {
 		list[i] *= factor
 	}
