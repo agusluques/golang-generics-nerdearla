@@ -64,9 +64,10 @@ type e[T any] struct { // HL
 
 func useE() {
 	// Instancia la estructura especificando el parámetro de tipo int
-	val := e[int]{t: 1}
-	val := e[int]{t: 1}
-	fmt.Println(val)
+	valInt := e[int]{t: 1}
+	valString := e[string]{t: "hola Nerdearla!"}
+	fmt.Println(valInt)
+	fmt.Println(valString)
 }
 
 // END SYNTAX2 OMIT
