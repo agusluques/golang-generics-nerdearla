@@ -178,12 +178,12 @@ Ejercicio 5 - Type Inference Advanced
 Hay otro lugar donde vamos a ver generics, y es en definiciones de tipos o interfaces
 
 ```go
-type Tupla[T any] struct {
+type Tuple[T any] struct {
   t1 T
   t2 T
 }
 
-tupla := Tupla[int]{
+tuple := Tuple[int]{
   t1: 1,
   t2: 2,
 }
@@ -195,21 +195,21 @@ También podemos crear interfaces que contengan parámetros de tipos:
 
 ```go
 type Sumable[T any] interface {
-  Sumar(T) T
+  SumToItself(T) T
 }
 
-type Entero int
+type Integer int
 
-func (e Entero) Sumar(b Entero) Entero {
+func (e Integer) SumToItself(b Integer) Integer {
   return e + b
 }
 
-func Suma[T Sumable[T]](a, b T) T {
-	return a.Sumar(b)
+func Sum[T Sumable[T]](a, b T) T {
+	return a.SumToItself(b)
 }
 
-/* Entero satisface la interfaz genérica Sumable */
-fmt.Println(Suma[Entero](1, 100)) // 101
+/* Integer satisfies the generic interface Sumable */
+fmt.Println(Sum[Integer](1, 100)) // 101
 ```
 
 ## Type Parameters en Tipos
