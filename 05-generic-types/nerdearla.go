@@ -2,12 +2,6 @@ package main
 
 import "fmt"
 
-// type Workshop struct {
-// 	title    string
-// 	speakers []string
-// 	repoURL  string
-// }
-
 type Talk struct {
 	title   string
 	speaker string
@@ -33,13 +27,19 @@ func main() {
 		{"How to be a ninja in Rust", "Juan"},
 	}
 
+	track := NewTrack("Dev", talks)
+
+	fmt.Printf("%+v\n", track.GetTalks())
+
 	// workshops := []Workshop{
 	// 	{"Generics in Go", []string{"Agus", "Nico"}, "https://github.com/agusluques/golang-generics-nerdearla"},
 	// 	{"Building a CI/CD pipeline", []string{"Matias", "Jorge"}, "https://github.com/mati/ci-cd-pipeline"},
 	// 	{"Working with Kubernetes", []string{"Ari", "Rafa"}, "https://github.com/rafinha/kubertenes-workshop"},
 	// }
-
-	track := NewTrack("Dev", talks)
-
-	fmt.Printf("%+v\n", track.GetTalks())
 }
+
+// type Workshop struct {
+// 	title    string
+// 	speakers []string
+// 	repoURL  string
+// }
