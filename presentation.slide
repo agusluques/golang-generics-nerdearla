@@ -142,15 +142,18 @@ Generaba código repetido porque terminábamos copiando y pegando la misma defin
 
 Ejercicio 1 - Type Parameters en Funciones
 
+
 ## Constraints Literals
 
 Los tipos genéricos no siempre son cualquier tipo
 
 Se pueden restringir a un conjunto de tipos (o _type sets_)
 
-Se usa el operador `|` para "unir" tipos:
+Se usa el operador pipe (`|`) para "unir" tipos:
 
 .code contraints-literals/literals.go /START1 OMIT/,/END1 OMIT/
+
+.image assets/definitions.png 
 
 ## Constraints Literals
 
