@@ -64,9 +64,8 @@ type e[T any] struct { // HL
 
 func useE() {
 	// Instancia la estructura especificando el parámetro de tipo int
-	val := e[int]{ // HL
-		t: 1,
-	}
+	val := e[int]{t: 1}
+	val := e[int]{t: 1}
 	fmt.Println(val)
 }
 

@@ -1,7 +1,11 @@
 package tilde
 
-import "fmt"
+import (
+	"fmt"
 
-func GetFloatsIn2Decimals[F float32 | float64](f F) string {
+	"golang.org/x/exp/constraints"
+)
+
+func GetFloatsIn2Decimals[F constraints.Float](f F) string {
 	return fmt.Sprintf("%.2f", f)
 }

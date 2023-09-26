@@ -9,6 +9,8 @@ Nicolás Del Piano
 HomeVision
 ndel314@gmail.com
 
+Nerdearla 2023
+
 ## Nosotros
 
 - Software Engineers
@@ -28,8 +30,8 @@ ndel314@gmail.com
 1. Constraints Literals
 1. Constraints Package
 1. Tilde (`~`)
-1. Type Parameters en **Tipos**
 1. Type Inference
+1. Type Parameters en **Tipos**
 1. Limitaciones
 1. Cuándo sí y cuándo no usar Generics
 
@@ -207,6 +209,20 @@ Process(id) // error ❌: ID does not satisfy int64 (possibly missing ~ for int6
 
 Ejercicio 3 - Tilde (~)
 
+## Type Inference
+
+Go puede inferir el tipo sin tener que especificarlo
+
+**Partial inference**
+
+.code type-inference/inference.go
+
+## Type Inference Advanced
+
+.image assets/pala.png _ 400
+
+Ejercicio 5 - Type Inference Advanced
+
 ## Type Parameters en Tipos
 
 Hay otro lugar donde vamos a ver generics, y es en definiciones de tipos o interfaces
@@ -251,20 +267,6 @@ fmt.Println(Suma[Entero](1, 100)) // 101
 .image assets/pala.png _ 400
 
 Ejercicio 4 - Generics Types
-
-## Type Inference
-
-Go puede inferir el tipo sin tener que especificarlo
-
-**Partial inference**
-
-.code type-inference/inference.go
-
-## Type Inference Advanced
-
-.image assets/pala.png _ 400
-
-Ejercicio 5 - Type Inference Advanced
 
 ## Limitaciones
 

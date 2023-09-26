@@ -10,7 +10,7 @@ import (
 // - Investigar el error de la llamada al método `Print`
 // - Solucionar el error
 // - 👀 Hint: chequear cual es el tipo que está infiriendo el compilador
-func Scale[I constraints.Integer](list []I, factor I) []I {
+func Scale[I constraints.Integer, T ~[]I](list T, factor I) T {
 	for i := range list {
 		list[i] *= factor
 	}
@@ -24,7 +24,9 @@ func (is IntSlice) Print() {
 }
 
 func main() {
-	listOfInts := []int{1, 2, 3}
-	fmt.Println(Scale(listOfInts, 2))
+	listOfInts := IntSlice{1, 2, 3}
+	listOfIntsX2 := Scale(listOfInts, 2)
+	fmt.Println(listOfIntsX2)
 	listOfInts.Print()
+	listOfIntsX2.Print()
 }
