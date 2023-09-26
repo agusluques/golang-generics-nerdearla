@@ -253,12 +253,12 @@ type B[X any] = T[X, X] // Error: generic type cannot be alias ❌
 Actualmente los métodos no soportan _type parameters_
 
 ```go
-type Moneda struct {
-  valor int
+type Currency struct {
+  value int
 }
 
-func (m *Moneda) Valor[T ~int]() T {
-  return m.valor // syntax error: method must have no type parameters ❌
+func (m *Currency) Value[T ~int]() T {
+  return m.value // syntax error: method must have no type parameters ❌
 }
 ```
 
