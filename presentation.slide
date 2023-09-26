@@ -225,14 +225,14 @@ Ejercicio 4 - Generics Types
 
 ## Limitaciones
 
-.image assets/github-issue-1.png _ 1000
-.image assets/github-issue-2.png _ 1000
-.caption [[https://github.com/golang/go/issues/48522][GitHub Issue]]
+.image assets/go-1.18-doc.png _ 1000
+.caption [[https://go.dev/doc/go1.18][Go v1.18]]
 
 ## Limitaciones
 
-.image assets/go-1.18-doc.png _ 1000
-.caption [[https://go.dev/doc/go1.18][Go v1.18]]
+.image assets/github-issue-1.png _ 1000
+.image assets/github-issue-2.png _ 1000
+.caption [[https://github.com/golang/go/issues/48522][GitHub Issue]]
 
 ## Más Limitaciones
 
@@ -245,6 +245,9 @@ type A = T[int, string] // OK ✅
 
 type B[X any] = T[X, X] // Error: generic type cannot be alias ❌
 ```
+
+.image assets/alias.png _ 1000
+.caption [[https://github.com/golang/go/issues/46477][GitHub Issue - Proposal]]
 
 ## Más Limitaciones
 
@@ -271,6 +274,9 @@ type Derived[Base any] struct {
 	Base // Error: embedded field type cannot be a (pointer to a) type parameter
 	x bool ❌
 }
+```
+
+.caption [[https://github.com/golang/go/issues/43621][Github Issue]]
 
 ## Cuándo sí y cuándo no usar Generics
 
