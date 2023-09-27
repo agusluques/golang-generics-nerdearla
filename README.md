@@ -65,6 +65,18 @@ Cada tipo tiene un "valor cero" (_zero value_), el cual puede ser pensado como e
 
 ### Tipos Compuestos
 
+Go admite los siguientes tipos compuestos:
+
+- Punteros `*T`
+- Struct `struct{}`
+- Funciones `func(){}` – las funciones son first-class types en Go
+- Tipos contenedores:
+  - Arreglos `[n]T` – un arreglo de longitud fija
+  - Slices `[]T` – una lista de longitud variable
+  - Maps `map[T1]T2` – arreglos asociativos o hash-tables
+  - Channels `channel T` – concurrencia
+  - Interfaces `interface{}` – polimorfismo
+
 <div id='generics'/>
 
 ## Generics
