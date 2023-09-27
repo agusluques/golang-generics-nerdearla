@@ -112,6 +112,8 @@ Se usa el operador pipe (`|`) para "unir" tipos:
 
 .code contraints-literals/literals.go /START3-any OMIT/,/END3-any OMIT/
 
+.image assets/nointerface.png _ 600
+
 ## Constraints Literals
 
 .code contraints-literals/literals.go /START4 OMIT/,/END4 OMIT/
