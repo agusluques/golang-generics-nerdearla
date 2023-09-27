@@ -140,20 +140,17 @@ Ejercicio 2 - Constraints Package
 
 Uno de los nuevos operadores anunciados en Go `1.18` fue el operador ~
 
-Fue agregado para que un tipo genérico permita cualquier tipo subyacente dentro de una constraint
-
-## Tilde (~)
+Fue agregado para que un tipo genérico permita cualquier tipo subyacente dentro de una restricción de tipo
 
 ```go
-type ID int64
+[A ~T]
 
-func Process[T int64](value T) {
-  // ...
+interface {
+  ~T | ...
 }
-
-var id ID = 10
-Process(id) // error ❌: ID does not satisfy int64 (possibly missing ~ for int64 in int64)
 ```
+
+Donde `T` no sea una interface
 
 ## Tilde (~)
 
