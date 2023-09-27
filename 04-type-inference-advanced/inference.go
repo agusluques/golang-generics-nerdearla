@@ -11,10 +11,11 @@ import (
 // - Solucionar el error
 // - 👀 Hint: chequear cual es el tipo que está infiriendo el compilador
 func Scale[I constraints.Integer](list []I, factor I) []I {
+	newList := make([]I, len(list))
 	for i := range list {
-		list[i] *= factor
+		newList[i] = list[i] * factor
 	}
-	return list
+	return newList
 }
 
 type IntSlice []int
@@ -26,7 +27,7 @@ func (is IntSlice) Print() {
 func main() {
 	listOfInts := IntSlice{1, 2, 3}
 	listOfIntsX2 := Scale(listOfInts, 2)
-	fmt.Println(listOfIntsX2)
 	listOfInts.Print()
-	listOfIntsX2.Print()
+	fmt.Println(listOfIntsX2)
+	// listOfIntsX2.Print()
 }
