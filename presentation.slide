@@ -154,6 +154,36 @@ Donde `T` no sea una interface
 
 ## Tilde (~)
 
+Algunos ejemplos válidos del uso del operador `~` ✅:
+
+```go
+~int
+~[]byte
+~map[int]string
+~chan struct{}
+~struct{x int}
+```
+
+Combinaciones con uniones de tipos `|`:
+
+```go
+type Signed interface {
+	~int | ~int8 | ~int16 | ~int32 | ~int64
+}
+```
+
+## Tilde (~)
+
+Ejemplos no válidos:
+
+```go
+~comparable ❌
+~interface{} ❌
+~any ❌
+```
+
+## Tilde (~)
+
 .image assets/pala.png _ 400
 
 Ejercicio 3 - Tilde (~)
